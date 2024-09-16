@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export default function App() {
@@ -9,49 +9,49 @@ export default function App() {
   const [count, setCount] = useState(0);
   const [name, setName] = useState<string>("");
   const [age, setAge] = useState<string>("");
+  const [student, setStudent] = useState([
+    { name: "John", age: 20 },
+    { name: "Doe", age: 25 },
+    { name: "Smith", age: 30 },
+    { name: "Jane", age: 22 },
+    { name: "Alex", age: 27 },
+    { name: "Emily", age: 24 },
+    { name: "John", age: 20 },
+    { name: "Doe", age: 25 },
+    { name: "Smith", age: 30 },
+    { name: "Jane", age: 22 },
+    { name: "Alex", age: 27 },
+    { name: "Emily", age: 24 },
+  ]);
+
 
   return (
     <View style={styles.container}>
-      <Text>Welcome back !!!</Text>
-      <Text style={{ fontSize: 20, fontWeight: "600" }}>count = {count}</Text>
-      <Text>Your name: {name}</Text>
-      <TextInput
-
-        onChangeText={(value) => setName(value)}
-        multiline
-        style={styles.textInput} />
       <View>
-        <Button title='Tap mee' onPress={() => setCount(count + 1)} />
-        <Button title='Reset' onPress={() => setCount(0)} color="pink" />
+        <Text>Student List:</Text>
+        <ScrollView>
+          <View>
+            {student.map(item => {
+              return (
+                <View key={item.name} style={{ backgroundColor: "red", padding: 20, marginBottom: 30 }}>
+                  <Text>{item.name}</Text>
+                </View>
+              )
+            })}
+          </View>
+        </ScrollView>
       </View>
-
-      <View>
-        <Text>
-          Your Age: {age}
-        </Text>
-        <TextInput
-          style={styles.textInput}
-          keyboardType='numeric'
-          onChangeText={(e) => setAge(e)}
-          maxLength={2} //max length of input
-        />
-      </View>
-    </View>
+    </View >
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    padding: 50,
+    paddingHorizontal: 20,
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textInput: {
-
-    height: 40,
-    width: 200,
-    borderColor: 'gray',
-    borderWidth: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
   }
 });
